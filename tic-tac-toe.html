@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>  
+        body{
+    display: flex;
+    justify-content: center;
+    align-items:center ;
+    height: 100vh;
+    margin: 0;
+    background-color: black;
+
+}
+h1{
+    font-size: 50px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items:center ;
+    
+}
+.game{
+    /* display: flex;
+    flex-wrap: wrap;
+    width: 300px; */
+    display: grid;
+    grid-template-columns: repeat(3,100px);
+    grid-gap: 5px;
+    
+}
+.box{
+    width: 100px;
+    height: 100px;
+    display: flex;
+    border: 1px solid black;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 10%;
+    font-size: 50px;
+    color: black;
+    
+
+
+}
+
+#rst{
+    display: flex;
+   
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    width: 60px;
+    height: 60px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.winner{
+    background-color: white;
+    height: 50px;
+    width: 200px;
+    margin-left: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 50px;
+    font-size: larger;
+    font-weight: bolder;
+    border-radius: 10%;
+
+}
+    </style>
+</head>
+<body>
+    <div class="cont">
+        <h1>Tic Tac Toe</h1>
+        <div class="game">
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+        </div>
+        <button id="rst">Reset</button>
+        <div class="winner"></div>
+    </div>
+    
+    <script>
+        let win = document.querySelector(".winner")
+
+let boxes = document.querySelectorAll(".box");
+
+let resetbtn = document.querySelector("#rst");
+
+let turnO = true;
+let filledBoxes = 0;
+const winpattern = [
+    [0,1,2],
+    [0,3,6],
+    [0,4,8],
+    [1,4,7],
+    [2,5,8],
+    [2,4,6],
+    [3,4,5],
+    [6,7,8],
+
+]
+
+boxes.forEach((box) => {
+    box.addEventListener("click", () => {
+      if (turnO) {
+        //playerO
+        box.innerText = "O";
+        turnO = false;
+      } else {
+        //playerX
+        box.innerText = "X";
+        turnO = true;
+      }
+      box.disabled = true;
+      filledBoxes++;
+        checkwinner();
+    })
+});
+const showwinner = (winner) => {
+  
+  if(winner){
+  win.innerText = `winner ${winner}`;}
+  else if(filledBoxes===9){
+    win.innerText = "Draw";
+  }
+}
+
+
+const checkwinner = () => {
+  for(let pattern of winpattern){
+
+    // console.log(pattern[0],pattern[1],pattern[2])
+
+    // console.log(boxes[pattern[0]].innerText,boxes[pattern[1]].innerText,boxes[pattern[2]].innerText)
+
+    let pos1value = boxes[pattern[0]].innerText;
+    let pos2value = boxes[pattern[1]].innerText;
+    let pos3value = boxes[pattern[2]].innerText;
+
+    if(pos1value != "" && pos2value != "" && pos3value != ""){
+      if(pos1value === pos2value && pos2value === pos3value){
+          showwinner(pos1value);
+          console.log("winner",pos1value);
+          boxes.forEach((box)=>box.disabled = true);
+        break;
+      }
+      
+    }
+
+
+  }
+}
+
+
+resetbtn.addEventListener("click", () => {
+
+  boxes.forEach((box) => {
+    box.innerText = "";
+  
+    box.disabled = false;
+  });
+
+  
+  turnO = true;
+
+
+  win.innerText = "";
+});
+
+1
+4
+    </script>
+    <!-- <script src="script.js"></script> -->
+</body>
+</html>
