@@ -6,7 +6,7 @@ A simple Tic Tac Toe game built using **HTML, CSS, and JavaScript**.
 
 ## 🚀 Live Preview
 👉 **Live Demo:**  
-https://vatsalkc.github.io/tictactoe/
+https://vatsalkc.github.io/tictactoe/index.html
 
 
 
